@@ -35,6 +35,7 @@ const gameBoard = (() => {
         })
         winnerText.textContent = "";
         isPlayer1 = true;
+        numOfMoves = 0;
     }
 
     const checkGameWinner = () => {
