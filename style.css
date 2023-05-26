@@ -1,0 +1,40 @@
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+#gameBoard {
+    border: 2px solid black;
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+[data-square] {
+    border: 1px solid black;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#winner {
+    color: rgb(38, 235, 12);
+}
+
+#reset {
+    margin: 10px;
+    height: 40px;
+    width: 60px;
+}
+
+#rules {
+    margin: 0px;
+}
