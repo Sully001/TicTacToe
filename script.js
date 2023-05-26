@@ -11,7 +11,9 @@ const player2 = PlayerFactory("Player 2", "O");
 
 const gameBoard = (() => {
     let board = ["", "", "", "", "", "", "", "", ""];
-
+    let isPlayer1 = true;
+    let numOfMoves = 0;
+    let winnerHasSet = false; 
 
     let winningPatterns = [
         [0, 1, 2],
@@ -23,29 +25,17 @@ const gameBoard = (() => {
         [0, 4, 8],
         [2, 4, 6],
     ]
-    let isPlayer1 = true;
-    let numOfMoves = 0;
-
-    const resetBoard = () => {
-        allSquares.forEach(square => {
-            square.innerHTML = "";
-            for (let i = 0; i < board.length; i++) {
-                board[i] = "";
-            }
-        })
-        winnerText.textContent = "";
-        isPlayer1 = true;
-        numOfMoves = 0;
-    }
-
+    
     const checkGameWinner = () => {
         for (let i = 0; i < winningPatterns.length; i++) {
 
             if (checkWinX(winningPatterns[i])) {
-                winnerText.textContent = "Player 1 Wins (X)"
+                winnerText.textContent = "Player 1 Wins (X)";
+                winnerHasSet = true;
             }
             if (checkWinO(winningPatterns[i])) {
-                winnerText.textContent = "Player 2 Wins (O)"
+                winnerText.textContent = "Player 2 Wins (O)";
+                winnerHasSet = true;
             }
         }
     }
@@ -60,6 +50,8 @@ const gameBoard = (() => {
 
     
     const setSquare = (square) => {
+        if (winnerHasSet) {return;}
+        
         if (!square.hasChildNodes()) {
             square.textContent = isPlayer1 ? player1.sign : player2.sign;
             numOfMoves++;
@@ -81,7 +73,7 @@ const gameBoard = (() => {
     const setBoardArr = (index) => {
         board[index] = isPlayer1 ? player1.sign: player2.sign;
     }
-    return {setSquare, resetBoard};
+    return {setSquare};
 })();
 
 
@@ -92,5 +84,5 @@ allSquares.forEach(square => {
 });
 
 resetBtn.addEventListener('click', () => {
-    gameBoard.resetBoard();
+    location.reload();
 })
